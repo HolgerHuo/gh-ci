@@ -1,0 +1,14 @@
+[Unit]
+Description=GitHub Continuous Integration
+After=network.target
+
+[Service]
+User=ci
+Group=ci
+WorkingDirectory=/home/ci/ci
+ExecStart=/home/ci/.local/bin/gunicorn -w 4 ci:app --access-logfile '-' 
+Restart=always
+Environment=PATH=/home/ci/.bun/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+
+[Install]
+WantedBy=multi-user.target
